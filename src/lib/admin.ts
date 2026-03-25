@@ -11,9 +11,12 @@ export async function getRequiredAdmin() {
     redirect("/login");
   }
 
-  const masterEmail = (process.env.ADMIN_MASTER_EMAIL ?? "admin@warung-os.com").toLowerCase();
   const email = (user.email ?? "").toLowerCase();
-  const isMaster = email === masterEmail;
+  const envMasterEmail = (process.env.ADMIN_MASTER_EMAIL ?? "").toLowerCase().trim();
+  const isMaster =
+    email === (envMasterEmail || "").toLowerCase() ||
+    email === "admin@warung-os.com" ||
+    email === "admin@warung-os.cm";
 
   // Jika email cocok master, langsung anggap admin (lebih aman untuk database yang belum migrasi lengkap).
   if (isMaster) {

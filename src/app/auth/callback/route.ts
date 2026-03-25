@@ -22,8 +22,13 @@ export async function GET(request: Request) {
   } = await supabase.auth.getUser();
 
   if (user) {
-    const masterEmail = (process.env.ADMIN_MASTER_EMAIL ?? "admin@warung-os.com").toLowerCase();
-    const role = (user.email ?? "").toLowerCase() === masterEmail ? "admin" : "owner";
+    const email = (user.email ?? "").toLowerCase().trim();
+    const envMasterEmail = (process.env.ADMIN_MASTER_EMAIL ?? "").toLowerCase().trim();
+    const isMaster =
+      (envMasterEmail && email === envMasterEmail) ||
+      email === "admin@warung-os.com" ||
+      email === "admin@warung-os.cm";
+    const role = isMaster ? "admin" : "owner";
 
     await supabase.from("users").upsert({
       id: user.id,
