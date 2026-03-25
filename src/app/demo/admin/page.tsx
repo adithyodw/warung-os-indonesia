@@ -5,11 +5,13 @@ export const dynamic = "force-dynamic";
 
 export default function DemoAdminRoute() {
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 py-6">
-      <DemoSimProvider>
-        <DemoAdminPage />
-      </DemoSimProvider>
-    </main>
+    <div className="min-h-screen bg-zinc-50">
+      <main className="mx-auto w-full max-w-7xl px-4 py-8 md:px-8">
+        <DemoSimProvider>
+          <DemoAdminPage />
+        </DemoSimProvider>
+      </main>
+    </div>
   );
 }
 

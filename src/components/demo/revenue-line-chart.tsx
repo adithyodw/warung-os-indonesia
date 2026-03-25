@@ -29,17 +29,23 @@ export function RevenueLineChart({ points }: { points: Point[] }) {
   const latest = points[points.length - 1]?.revenue ?? 0;
 
   return (
-    <div className="rounded-3xl border bg-white/70 p-3">
+    <div className="rounded-3xl border bg-white/70 p-3 shadow-sm transition-shadow hover:shadow-md">
       <div className="flex items-baseline justify-between">
         <p className="text-sm font-semibold text-zinc-900">Revenue 14 hari</p>
-        <p className="text-xs text-zinc-600">Terakhir: Rp{Math.round(latest).toLocaleString("id-ID")}</p>
+        <p className="text-xs text-zinc-600 tabular-nums">Terakhir: Rp{Math.round(latest).toLocaleString("id-ID")}</p>
       </div>
       <div className="mt-2">
         <svg viewBox="0 0 320 120" className="h-28 w-full">
+          <defs>
+            <linearGradient id="revStroke" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="rgb(24 24 27)" />
+              <stop offset="100%" stopColor="rgb(63 63 70)" />
+            </linearGradient>
+          </defs>
           <polyline
             points={polyline}
             fill="none"
-            stroke="rgb(24 24 27)"
+            stroke="url(#revStroke)"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
