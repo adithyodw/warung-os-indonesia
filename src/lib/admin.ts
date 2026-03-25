@@ -1,7 +1,12 @@
 import { redirect } from "next/navigation";
 import { getServerSupabase } from "@/lib/supabase/server";
+import { getDemoUser, isDemoModeEnabled } from "@/lib/demo";
 
 export async function getRequiredAdmin() {
+  if (isDemoModeEnabled()) {
+    return { user: getDemoUser(), role: "admin" as const };
+  }
+
   const supabase = await getServerSupabase();
   const {
     data: { user },

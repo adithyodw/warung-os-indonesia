@@ -7,11 +7,16 @@ import { formatRupiah } from "@/lib/currency";
 import { getDailySummaryText, getInsightData } from "@/lib/analytics";
 import { getRequiredUser } from "@/lib/auth";
 import { getServerSupabase } from "@/lib/supabase/server";
+import { getDemoInsights, isDemoModeEnabled } from "@/lib/demo";
 
 export default async function DashboardPage() {
-  const user = await getRequiredUser();
-  const supabase = await getServerSupabase();
-  const insight = await getInsightData(supabase, user.id);
+  const insight = isDemoModeEnabled()
+    ? getDemoInsights()
+    : await (async () => {
+        const user = await getRequiredUser();
+        const supabase = await getServerSupabase();
+        return getInsightData(supabase, user.id);
+      })();
   const cashFlow = insight.totalPenjualanHariIni - Math.max(0, insight.totalPenjualanHariIni - insight.totalUntungHariIni);
 
   return (
