@@ -63,3 +63,12 @@ npm run dev
 - Pengajuan pinjaman tersimpan beserta skor.
 - Supplier order tersimpan.
 - WhatsApp bot bisa reply pertanyaan owner.
+
+## 8) Demo Portal (Live Interactive)
+
+- URL:
+  - `https://your-domain/demo` (Executive dashboard + Warung detail + AI insights + pembayaran + lending + supplier + WhatsApp simulasi)
+  - `https://your-domain/demo/admin` (Admin overview + activity feed)
+- Seed data demo (Supabase):
+  - Jalankan `supabase/seed-demo-portal.sql`
+  - Script ini butuh `DEMO_USER_ID` (isi dengan `auth.users.id` yang kamu buat untuk demo).
