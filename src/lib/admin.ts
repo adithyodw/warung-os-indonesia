@@ -11,7 +11,7 @@ export async function getRequiredAdmin() {
     redirect("/login");
   }
 
-  const masterEmail = (process.env.ADMIN_MASTER_EMAIL ?? "admin@warung-os.cm").toLowerCase();
+  const masterEmail = (process.env.ADMIN_MASTER_EMAIL ?? "admin@warung-os.com").toLowerCase();
   const email = (user.email ?? "").toLowerCase();
   const isMaster = email === masterEmail;
 
