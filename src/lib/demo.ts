@@ -1,5 +1,7 @@
 export function isDemoModeEnabled() {
-  return process.env.NEXT_PUBLIC_DEMO_MODE === "true";
+  const raw = process.env.NEXT_PUBLIC_DEMO_MODE ?? process.env.DEMO_MODE;
+  const v = (raw ?? "").toString().trim().toLowerCase();
+  return v === "true" || v === "1" || v === "yes" || v === "on";
 }
 
 export function getDemoUser() {
