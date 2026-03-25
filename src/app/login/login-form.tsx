@@ -26,7 +26,9 @@ export function LoginForm() {
     });
 
     if (error) {
-      setMessage("Gagal kirim link login. Coba email lain.");
+      const detail = error.message ? ` (${error.message})` : "";
+      setMessage(`Gagal kirim link login.${detail}`);
+      console.error("Supabase OTP error:", error);
     } else {
       setMessage("Link login sudah dikirim. Cek email ya.");
     }
