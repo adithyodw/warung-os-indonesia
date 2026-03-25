@@ -22,10 +22,14 @@ export async function GET(request: Request) {
   } = await supabase.auth.getUser();
 
   if (user) {
+    const masterEmail = (process.env.ADMIN_MASTER_EMAIL ?? "admin@warung.com").toLowerCase();
+    const role = (user.email ?? "").toLowerCase() === masterEmail ? "admin" : "owner";
+
     await supabase.from("users").upsert({
       id: user.id,
       name: user.user_metadata?.name ?? user.email?.split("@")[0] ?? "Pemilik Warung",
       phone: user.phone ?? null,
+      role,
     });
 
     const { data: warung } = await supabase

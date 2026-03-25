@@ -1,10 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatRupiah } from "@/lib/currency";
-import { getRequiredUser } from "@/lib/auth";
+import { getRequiredAdmin } from "@/lib/admin";
 import { getServerSupabase } from "@/lib/supabase/server";
 
 export default async function AdminPage() {
-  const user = await getRequiredUser();
+  const { user } = await getRequiredAdmin();
   const supabase = await getServerSupabase();
 
   const [sales, payments, loans, orders] = await Promise.all([

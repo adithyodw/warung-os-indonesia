@@ -1,5 +1,32 @@
 create extension if not exists "pgcrypto";
 
+-- Backward compatible migration: make sure `role` column exists
+-- (for databases that already have the earlier v1 schema).
+do $$
+begin
+  if exists (
+    select 1
+    from information_schema.tables
+    where table_schema = 'public'
+      and table_name = 'users'
+  ) then
+    begin
+      alter table public.users add column if not exists role text not null default 'owner';
+    exception when others then null;
+    end;
+
+    begin
+      alter table public.users drop constraint if exists users_role_check;
+    exception when others then null;
+    end;
+
+    begin
+      alter table public.users add constraint users_role_check check (role in ('owner', 'admin'));
+    exception when others then null;
+    end;
+  end if;
+end $$;
+
 create table if not exists public.users (
   id uuid primary key references auth.users(id) on delete cascade,
   name text not null default 'Pemilik Warung',
