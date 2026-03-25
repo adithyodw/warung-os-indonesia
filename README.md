@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Warung OS Indonesia V3
 
-## Getting Started
+Platform lengkap untuk digitalisasi warung Indonesia:
 
-First, run the development server:
+- Catat penjualan harian
+- Hitung untung otomatis
+- Pantau stok + alert stok menipis
+- Pembayaran QRIS / Virtual Account (Xendit-ready)
+- Pembiayaan mikro (lending score + pengajuan pinjaman)
+- Supplier marketplace + restock order
+- WhatsApp bot + daily report
+- AI assistant (Claude-ready, fallback local insight)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Tech stack: Next.js App Router, Tailwind, shadcn/ui, Supabase Auth+Postgres+Realtime, Xendit, WhatsApp API, Claude API.
+
+## Pages
+
+- `/login` - login email OTP (MVP auth)
+- `/dashboard` - total penjualan, untung, produk terlaris, notifikasi
+- `/jualan` - input jualan super simple (tap produk + manual)
+- `/stok` - list produk, stok, alert stok hampir habis
+- `/pembayaran` - buat invoice QRIS/VA + riwayat pembayaran
+- `/pembiayaan` - credit scoring + pengajuan pinjaman
+- `/supplier` - katalog supplier + restock order
+- `/admin` - ringkasan operasional lintas modul
+- `/ai-chat` - chat AI Bahasa Indonesia + voice input ready
+
+## Environment Variables
+
+Buat `.env.local`:
+
+```env
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+CLAUDE_API_KEY=
+XENDIT_SECRET_KEY=
+XENDIT_WEBHOOK_TOKEN=
+WHATSAPP_API_KEY=
+WHATSAPP_VERIFY_TOKEN=
+WHATSAPP_PHONE_NUMBER_ID=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Run Local
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Supabase Schema
 
-## Learn More
+Run SQL dari file:
 
-To learn more about Next.js, take a look at the following resources:
+`supabase/schema.sql`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Optional seed supplier:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`supabase/seed.sql`
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Lihat panduan lengkap:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`docs/DEPLOYMENT.md`

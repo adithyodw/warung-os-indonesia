@@ -1,0 +1,18 @@
+{
+  "name": "Warung OS Indonesia",
+  "short_name": "Warung OS",
+  "description": "Catat jualan, pantau stok, cek untung warung.",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#16a34a",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
